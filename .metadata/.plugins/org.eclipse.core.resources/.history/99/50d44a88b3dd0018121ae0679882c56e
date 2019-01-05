@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import application.Bus ?>
+<?import application.Driver ?>
+<?import java.lang.String?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.collections.FXCollections?>
+	
+<GridPane fx:id="gridPane2" fx:controller="application.PassengerSceneController" xmlns:fx="http://javafx.com/fxml" alignment="center">
+	<ScrollPane GridPane.hgrow="ALWAYS" fitToWidth="true">
+		<GridPane fx:id="gridPaneInner" alignment="center" hgap="10" vgap="20">
+			<stylesheets><URL value="@application.css" /></stylesheets>
+			<padding><Insets top="25" right="25" bottom="10" left="25"/></padding>
+			
+			<!-- Toolbar -->
+			<!-- <ToolBar GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="20">
+				<Button styleClass="button" text="Completare Registru" onAction="#handleLoginButtonAction"/>
+			</ToolBar>-->
+			<padding><Insets top="25" right="25" bottom="10" left="25"/></padding>
+			<!-- Title -->
+			<Text text="Completare Pasageri" styleClass="h1" GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.columnSpan="4"/>
+		 
+		 	<!-- Fields -->
+		    <Label styleClass="label" text="Selectati fisierul (.doc, .docx)" GridPane.columnIndex="0" GridPane.rowIndex="4"/> 
+		    <Button styleClass="button" text="selectare" onAction="#handleSelectareDocumentButtonAction"  GridPane.rowIndex="4" GridPane.columnIndex="1"  GridPane.columnSpan = "1"/>
+		    <!-- Upload Button  -->
+		    <Button fx:id="incarcareBtn" styleClass="button" text="Incarcare pasageri" onAction="#handleIncarcarePasageriButtonAction"  GridPane.rowIndex="6" GridPane.columnIndex="1"  GridPane.columnSpan = "1" visible="false"/>
+		</GridPane>
+	</ScrollPane>
+</GridPane>

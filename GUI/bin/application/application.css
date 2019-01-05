@@ -1,0 +1,68 @@
+/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+.h1
+{
+	-fx-font-family:Tahoma;
+	-fx-font-size: 25px;
+	-fx-spacing:  50 50 50 50 ;
+}
+
+.alert
+{
+	-fx-font-size: 20px;	
+}
+
+.label
+{
+	-fx-pref-width: 200px; 
+}
+
+.tool-bar
+{
+	-fx-spacing: 10 50 100 200;
+}
+
+.text_input_short
+{
+	-fx-pref-width: 180px;
+	-fx-max-width: 180px;
+}
+
+.text_input_extra_short
+{
+	-fx-pref-width: 60px;
+	-fx-max-width: 60px;	
+}
+
+.choice-box
+{
+	-fx-pref-width: 450px;
+	-fx-max-width: 450px;
+	-fx-min-width: 450px;	
+}
+
+.choice-box .menu-item > .label {
+    -fx-pref-width: 550px;
+	-fx-max-width: 550px;
+	-fx-min-width: 550px;
+}
+
+.choice-box.small
+{
+	-fx-pref-width: 170px;
+	-fx-max-width: 170px;
+	-fx-min-width: 170px;	
+}
+
+.choice-box.small .menu-item > .label {
+    -fx-pref-width: 170px;
+	-fx-max-width: 170px;
+	-fx-min-width: 170px;
+}
+
+.invalidValue
+{
+	-fx-border-color: red;
+    -fx-border-insets: 5;
+    -fx-border-width: 1;
+    -fx-border-style: dashed;
+}

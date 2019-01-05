@@ -1,0 +1,155 @@
+package application;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+
+import org.apache.poi.EncryptedDocumentException;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+
+import Sheet.Excel;
+import automationFramework.Person;
+import automationFramework.SeleniumCommands;
+import javafx.beans.binding.StringExpression;
+import javafx.beans.property.ReadOnlyStringWrapper;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.geometry.Insets;
+import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import wordDoc.WordDoc;
+
+public class PassengerSceneController {
+	
+	protected SeleniumCommands selenium = SeleniumCommands.getInstance();
+	protected ArrayList<Person> persons;
+	@FXML protected GridPane gridPane2;
+	@FXML protected GridPane gridPaneInner;
+	@FXML protected Button incarcareBtn;
+	
+	@FXML
+	private void initialize() {
+	}
+	
+@FXML protected void handleSelectareDocumentButtonAction(ActionEvent event) {
+	
+		try {
+			
+			FileChooser fileChooser = new FileChooser();
+			fileChooser.setTitle("Selectati fisierul");
+			FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Document files (*.doc)", "*.doc");
+			FileChooser.ExtensionFilter extFilter2 = new FileChooser.ExtensionFilter("Document files (*.docx)", "*.docx");
+			FileChooser.ExtensionFilter extFilter3 = new FileChooser.ExtensionFilter("Document files (*.xls)", "*.xls");
+			FileChooser.ExtensionFilter extFilter4 = new FileChooser.ExtensionFilter("Document files (*.xlsx)", "*.xlsx");
+			fileChooser.getExtensionFilters().add(extFilter);
+			fileChooser.getExtensionFilters().add(extFilter2);
+			fileChooser.getExtensionFilters().add(extFilter3);
+			fileChooser.getExtensionFilters().add(extFilter4);
+			
+			Stage stage = (Stage) gridPane2.getScene().getWindow();
+			File file = fileChooser.showOpenDialog(stage);
+			String fileName = file.getPath();
+			ArrayList<String> rows = new ArrayList<String>();
+			
+			//Read word doc
+			if((fileName.endsWith(".doc") || fileName.endsWith(".docx"))) { 
+				WordDoc wordDoc = new WordDoc();
+				
+				if(file != null)
+				{
+					//Check for table
+					rows = wordDoc.getTableImplodedRows(file);
+					//if no table found, search paragraphs
+					if(rows.size() < 1) rows = wordDoc.readParagraphs(file);
+				} 
+	        } 
+			//Read excel sheet
+			else if((fileName.endsWith(".xls") || fileName.endsWith(".xlsx"))) {
+				Excel sheet = new Excel();
+				if(file != null)
+				{
+					//Read rows
+					rows = sheet.readSheet(file);
+				}
+	        }
+			
+			
+			if(rows.size() > 0)
+			{
+				persons = new ArrayList<Person>();
+			
+				
+				Scene appScene = (Scene) ((Node) event.getSource()).getScene();
+				TableView table = new TableView();
+				
+				table.setEditable(true);
+				 
+		        TableColumn<Person, String> listaPasCol = new TableColumn("Lista pasagerilor");
+		        listaPasCol.setCellValueFactory(cellData -> cellData.getValue().getPropertyName());
+		        TableColumn<Person, Integer> numbCol = new TableColumn("Nr.");
+		        numbCol.setCellValueFactory(cellData -> cellData.getValue().getPropertyNumb().asObject());
+		        
+		        table.getColumns().add(numbCol);
+		        table.getColumns().add(listaPasCol);     
+		        int i = 0;
+		        for(String name : rows) {
+		        	persons.add(new Person(++i,name));
+				}
+		        
+		        table.setItems(FXCollections.observableList(persons));
+			      
+		        gridPaneInner.add(table,0,5,10,1);
+		        
+		        incarcareBtn.setVisible(true);
+			}
+		}
+		catch(InvalidFormatException e) {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Error Dialog");
+			alert.setHeaderText("Document nevalid");
+			alert.setContentText("Tipul documentului selectat nu este compatibil cu programul. Va rugam sa selectati un document de tip .doc, .docx, .xls sau .xlsx!");
+
+			alert.showAndWait();
+			
+		}
+		catch(EncryptedDocumentException e) {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Error Dialog");
+			alert.setHeaderText("Encrypt error");
+			alert.setContentText("EncryptedDocumentException!");
+		}
+		catch(IOException e) {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Error Dialog");
+			alert.setContentText("Documentul nu poate fi deschis!");
+
+			alert.showAndWait();
+		}
+	 }
+
+	@FXML protected void handleIncarcarePasageriButtonAction(ActionEvent event) {
+		boolean success = selenium.incarcaPasager(persons);
+		
+		if(success)
+		{
+			selenium.openPassengerList();
+		}
+		
+	}
+}
+

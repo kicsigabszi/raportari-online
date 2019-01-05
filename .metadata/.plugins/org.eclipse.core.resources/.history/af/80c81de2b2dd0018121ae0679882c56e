@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import application.Bus ?>
+<?import application.Driver ?>
+<?import java.lang.String?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.collections.FXCollections?>
+	
+<GridPane fx:controller="application.Controller" xmlns:fx="http://javafx.com/fxml" alignment="center">
+	<ScrollPane GridPane.hgrow="ALWAYS" fitToWidth="true">
+		<GridPane alignment="center" hgap="10" vgap="20">
+			<stylesheets><URL value="@application.css" /></stylesheets>
+			<padding><Insets top="25" right="25" bottom="10" left="25"/></padding>
+			
+			<!-- Toolbar -->
+			<!--<ToolBar GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="20">
+			</ToolBar>-->
+			<padding><Insets top="25" right="25" bottom="10" left="25"/></padding>
+			<!-- Title -->
+			<Text text="Completare Registru" styleClass="h1" GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.columnSpan="4"/>
+		 
+		 	<!-- Fields -->
+		    <Label styleClass="label1" text="Tip document control:" GridPane.columnIndex="0" GridPane.rowIndex="4"/> 
+		    <ChoiceBox fx:id="crTipDocument" GridPane.columnIndex="1" GridPane.rowIndex="4" GridPane.columnSpan = "4">
+		   		<String fx:value="Document de control  prin servicii ocazionale in trafic national"/>
+		   		<String fx:value="Document de control  prin servicii ocazionale in trafic international intre state membre UE"/>
+		   		<String fx:value="Document de control  prevazut de Acordul INTERBUS"/>
+		   		<String fx:value="Autorizatie pentru serviciul ocazional neliberalizat"/>
+		    </ChoiceBox>
+		 
+		    <Label styleClass="label" text="Număr document control:" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
+		    <TextField fx:id="crNrDocument" GridPane.columnIndex="1" GridPane.rowIndex="5" GridPane.columnSpan = "3"/>
+		        
+		    <Label styleClass="label" text="Număr foaie:" GridPane.columnIndex="0" GridPane.rowIndex="6"/>
+		 	<TextField fx:id="crNrFoaie" styleClass="text_input_short" GridPane.columnIndex="1" GridPane.rowIndex="6" GridPane.columnSpan = "3"/>
+		 	
+		 	<Label styleClass="label" text="Numar Circulatie:" GridPane.columnIndex="0" GridPane.rowIndex="7"/> 	
+			<TextField fx:id="crCirc1" styleClass="text_input_extra_short" GridPane.columnIndex="1" GridPane.rowIndex="7" GridPane.columnSpan = "1"/>
+			<TextField fx:id="crCirc2" styleClass="text_input_extra_short" GridPane.columnIndex="2" GridPane.rowIndex="7" GridPane.columnSpan = "1"/>
+			<TextField fx:id="crCirc3" styleClass="text_input_extra_short" GridPane.columnIndex="3" GridPane.rowIndex="7" GridPane.columnSpan = "1"/>
+			<ChoiceBox fx:id="crBus" styleClass="small"  GridPane.columnIndex="4" GridPane.rowIndex="7" GridPane.columnSpan = "1" onAction="#busSelection">
+				<items>
+					<FXCollections fx:factory="observableArrayList">
+				   		<Bus value="HR-50-GBJ (MAN)" nrinmatriculare="HR-50-GBJ" nrlocuri = "51"></Bus>
+				   		<Bus value="HR-51-GBJ (Neoplan)" nrinmatriculare="HR-51-GBJ" nrlocuri = "49"/>
+				   		<Bus value="HR-53-GBJ (Setra)" nrinmatriculare="HR-53-GBJ" nrlocuri = "49"/>
+				   		<Bus value="HR-46-GBJ (Mercedes Vario)" nrinmatriculare="HR-46-GBJ" nrlocuri = "19"/>
+			   		</FXCollections>
+			   	</items>
+		    </ChoiceBox>
+			
+			<Label styleClass="label" text="Numar locuri:" GridPane.columnIndex="0" GridPane.rowIndex="8"/>
+		 	<TextField fx:id="crNrLocuri" styleClass="text_input_short" GridPane.columnIndex="1" GridPane.rowIndex="8" GridPane.columnSpan = "3"/>
+		 	
+		 	<Label styleClass="label" text="Nume Sofer 1:" GridPane.columnIndex="0" GridPane.rowIndex="9"/>
+		 	<TextField fx:id="crNumeSofer1" styleClass="text_input_short" GridPane.columnIndex="1" GridPane.rowIndex="9" GridPane.columnSpan = "3"/>
+		 	<ChoiceBox fx:id="crSofer1" styleClass="small"  GridPane.columnIndex="4" GridPane.rowIndex="9" GridPane.columnSpan = "1" onAction="#sofer1Selection">
+				<items>
+					<FXCollections fx:factory="observableArrayList">
+						<Driver value="" cnp=""></Driver>
+				   		<Driver value="Barabas Arpad" cnp="1801121194033"></Driver>
+				   		<Driver value="Gabos Jozsef" cnp="1630722194354"></Driver>
+				   		<Driver value="Gabos Szabolcs" cnp="1890825190449"></Driver>
+				   		<Driver value="Gyorgy Robert" cnp="1770607194352"></Driver>
+				   		<Driver value="Imecs Gal Attila" cnp="1760303194352"></Driver>
+				   		<Driver value="Marton Sandor" cnp="1640508194350"></Driver>
+				   		<Driver value="Mihaly Attila" cnp="1810716190463"></Driver>
+				   		<Driver value="Orban Erno" cnp="1671004192521"></Driver>
+				   		<Driver value="Sandor Levente" cnp="1800712194031"></Driver>
+				   		<Driver value="Simo Andras" cnp="1631112194358"></Driver>
+			   		</FXCollections>
+			   	</items>
+		    </ChoiceBox>
+		 	
+		 	<Label styleClass="label" text="CNP Sofer 1:" GridPane.columnIndex="0" GridPane.rowIndex="10"/>
+		 	<TextField fx:id="crCnpSofer1" styleClass="text_input_short" GridPane.columnIndex="1" GridPane.rowIndex="10" GridPane.columnSpan = "3"/>
+		 	
+		 	<Label styleClass="label" text="Nume Sofer 2:" GridPane.columnIndex="0" GridPane.rowIndex="11"/>
+		 	<TextField fx:id="crNumeSofer2" styleClass="text_input_short" GridPane.columnIndex="1" GridPane.rowIndex="11" GridPane.columnSpan = "3"/>
+		 	<ChoiceBox fx:id="crSofer2" styleClass="small" GridPane.columnIndex="4" GridPane.rowIndex="11" GridPane.columnSpan = "1" onAction="#sofer2Selection">
+				<items>
+					<FXCollections fx:factory="observableArrayList">
+						<Driver value="" cnp=""></Driver>
+				   		<Driver value="Barabas Arpad" cnp="1801121194033"></Driver>
+				   		<Driver value="Gabos Jozsef" cnp="1630722194354"></Driver>
+				   		<Driver value="Gabos Szabolcs" cnp="1890825190449"></Driver>
+				   		<Driver value="Gyorgy Robert" cnp="1770607194352"></Driver>
+				   		<Driver value="Imecs Gal Attila" cnp="1760303194352"></Driver>
+				   		<Driver value="Marton Sandor" cnp="1640508194350"></Driver>
+				   		<Driver value="Mihaly Attila" cnp="1810716190463"></Driver>
+				   		<Driver value="Orban Erno" cnp="1671004192521"></Driver>
+				   		<Driver value="Sandor Levente" cnp="1800712194031"></Driver>
+				   		<Driver value="Simo Andras" cnp="1631112194358"></Driver>
+			   		</FXCollections>
+			   	</items>
+		    </ChoiceBox>
+		 	
+		 	<Label styleClass="label" text="CNP Sofer 2:" GridPane.columnIndex="0" GridPane.rowIndex="12"/>
+		 	<TextField fx:id="crCnpSofer2" styleClass="text_input_short" GridPane.columnIndex="1" GridPane.rowIndex="12" GridPane.columnSpan = "3"/>
+		 	
+		 	<Label styleClass="label" text="Data transport:" GridPane.columnIndex="0" GridPane.rowIndex="13"/>
+		 	<DatePicker fx:id="crDataTransport" styleClass="text_input_short" GridPane.columnIndex="1" GridPane.rowIndex="13" GridPane.columnSpan = "3"/>
+		 	
+		 	<Label styleClass="label" text="Data transp END Circuit:" GridPane.columnIndex="0" GridPane.rowIndex="14"/>
+		 	<DatePicker fx:id="crDataEndTransport" styleClass="text_input_short" GridPane.columnIndex="1" GridPane.rowIndex="14" GridPane.columnSpan = "3"/>	
+		
+			<Label styleClass="label" text="Loc Plecare:" GridPane.columnIndex="0" GridPane.rowIndex="15"/>
+		 	<TextField fx:id="crLocPlecare" styleClass="text_input_short" GridPane.columnIndex="1" GridPane.rowIndex="15" GridPane.columnSpan = "3" text="Vlahita"/>
+		 	
+		 	<Label styleClass="label" text="Loc Sosire:" GridPane.columnIndex="0" GridPane.rowIndex="16"/>
+		 	<TextField fx:id="crLocSosire" styleClass="text_input_short" GridPane.columnIndex="1" GridPane.rowIndex="16" GridPane.columnSpan = "3" text="Vlahita"/>
+		 	
+		 	<!-- Operation message -->
+		 	<Text fx:id="message" styleClass="alert" GridPane.columnIndex="0" GridPane.rowIndex="17" GridPane.columnSpan = "3" text="Datele au fost salvate!" />
+		 	<!-- Save BTN -->
+		 	<HBox spacing="10" alignment="bottom_right"  GridPane.columnIndex="1" GridPane.rowIndex="18" GridPane.columnSpan = "1">
+		        <Button styleClass="button" text="Salvare" onAction="#handleCompletareRegistruSalvareButtonAction"/>
+			</HBox>
+		 	
+			<HBox spacing="10" alignment="bottom_right" GridPane.columnIndex="2" GridPane.rowIndex="18" GridPane.columnSpan = "2">
+				<Button fx:id="completarePasageriBtn" styleClass="button" text="Completare Pasageri" onAction="#handleShowPassengerScene" />
+			</HBox>
+		</GridPane>
+	</ScrollPane>
+</GridPane>

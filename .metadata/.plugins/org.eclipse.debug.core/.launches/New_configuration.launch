@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.libreoffice.ide.eclipse.core.launchlibreoffice">
+<stringAttribute key="org.eclipse.debug.core.SOURCE_PATH_COMPUTER_ID" value="org.eclipse.jdt.launching.sourceLookup.javaSourcePathComputer"/>
+<stringAttribute key="org.eclipse.debug.core.source_locator_id" value="org.eclipse.jdt.launching.sourceLocator.JavaSourceLookupDirector"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="StarterProject"/>
+<stringAttribute key="org.libreoffice.ide.eclipse.core.PROJECT_ATTR" value="StarterProject"/>
+<booleanAttribute key="org.libreoffice.ide.eclipse.core.USE_CLEAN_USER_INSTALLATION_ATTR" value="false"/>
+</launchConfiguration>
